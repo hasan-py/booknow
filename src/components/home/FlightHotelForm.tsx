@@ -1,3 +1,4 @@
+import { getCitiesData } from "@/api/getCities";
 import {
   CustomButton,
   CustomCardSelect,
@@ -9,23 +10,57 @@ import {
   initDataFlightHotel,
 } from "@/schema/flightHotelFormSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function FlightHotelForm() {
+  const [cities, setCities] = useState([]);
   const form = useForm({
     shouldUnregister: true,
     defaultValues: { ...initDataFlightHotel },
     resolver: yupResolver(flighHotelFormSchema),
   });
 
+  const router = useRouter();
+
   const [bookingType] = form.watch(["bookingType"]);
 
   const onSubmit = (data: any) => {
-    console.log("data", data);
+    if (data?.bookingType?.value === "hotel") {
+      router.push(
+        `hotel-search?city=${data?.city?.label}&travallers=${
+          +data?.numberOfAdults + +data?.numberOfChildren
+        }&rooms=${data?.numberOfRooms}&checkInDate=${
+          data?.checkInDate
+        }&checkOutDate=${data?.checkOutDate}`
+      );
+    } else {
+      router.push(
+        `flight-search?departureCity=${
+          data?.departureCity?.label
+        }&arrivalCity=${data?.arrivalCity?.label}&travallers=${
+          +data?.numberOfAdults + +data?.numberOfChildren
+        }&departureDate=${data?.departureDate}${
+          data?.returnDate ? `&returnDate=${data?.returnDate}` : ""
+        }`
+      );
+    }
   };
 
+  useEffect(() => {
+    (async () => {
+      const cities = await getCitiesData();
+      setCities(cities);
+    })();
+  }, []);
+
   return (
-    <div className="w-full md:w-1/2 p-4 md:p-8">
+    <div className="w-full md:w-1/2 p-4 md:p-8 border md:m-4">
+      <h1 className="text-center mb-8 text-xl font-bold text-orange-500">
+        BookNow
+      </h1>
+
       <div className="mt-4 mb-8">
         <CustomCardSelect
           formSetup={form}
@@ -45,8 +80,8 @@ export default function FlightHotelForm() {
       </div>
 
       {bookingType?.value === "hotel" ? (
-        <div className="space-y-2">
-          <div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Check-In Date"
@@ -55,7 +90,7 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Check-out Date"
@@ -64,25 +99,16 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomSelect
               label="City"
               name="city"
               formSetup={form}
-              options={[
-                {
-                  value: "bangladesh",
-                  label: "Bangladesh",
-                },
-                {
-                  value: "India",
-                  label: "India",
-                },
-              ]}
+              options={cities}
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Number of Rooms"
@@ -91,7 +117,7 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Number of Adults"
@@ -100,7 +126,7 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Number of Children"
@@ -110,44 +136,26 @@ export default function FlightHotelForm() {
           </div>
         </div>
       ) : (
-        <div className="space-y-2">
-          <div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="col-span-1">
             <CustomSelect
               label="Departure City"
               name="departureCity"
               formSetup={form}
-              options={[
-                {
-                  value: "bangladesh",
-                  label: "Bangladesh",
-                },
-                {
-                  value: "India",
-                  label: "India",
-                },
-              ]}
+              options={cities}
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomSelect
               label="Arrival City"
               name="arrivalCity"
               formSetup={form}
-              options={[
-                {
-                  value: "bangladesh",
-                  label: "Bangladesh",
-                },
-                {
-                  value: "India",
-                  label: "India",
-                },
-              ]}
+              options={cities}
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Departure Date"
@@ -156,7 +164,7 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Return Date"
@@ -165,7 +173,7 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Number of Adults"
@@ -174,7 +182,7 @@ export default function FlightHotelForm() {
             />
           </div>
 
-          <div>
+          <div className="col-span-1">
             <CustomInput
               formSetup={form}
               label="Number of Children"

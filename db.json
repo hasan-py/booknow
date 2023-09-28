@@ -1,0 +1,88 @@
+{
+  "flights": [
+    {
+      "airline": "Biman Bangladesh Airlines",
+      "airlineLogo": "https://airlineimages.s3.ap-southeast-1.amazonaws.com/128/BG.png",
+      "departureCity": "Dhaka",
+      "arrivalCity": "Chittagong",
+      "departureDate": "2023-09-29",
+      "returnDate": "2023-09-29",
+      "price": "100"
+    },
+    {
+      "airline": "Emirates",
+      "airlineLogo": "https://airlineimages.s3.ap-southeast-1.amazonaws.com/128/EK.png",
+      "departureCity": "Dhaka",
+      "arrivalCity": "Dubai",
+      "departureDate": "2023-09-29",
+      "returnDate": "2023-09-29",
+      "price": "300"
+    },
+    {
+      "airline": "Turkish Airlines Inc",
+      "airlineLogo": "https://airlineimages.s3.ap-southeast-1.amazonaws.com/128/TK.png",
+      "departureCity": "Dhaka",
+      "arrivalCity": "Chittagong",
+      "departureDate": "2023-09-29",
+      "returnDate": "2023-09-29",
+      "price": "200"
+    },
+    {
+      "airline": "Qatar Airways",
+      "airlineLogo": "https://airlineimages.s3.ap-southeast-1.amazonaws.com/128/QR.png",
+      "departureCity": "Dhaka",
+      "arrivalCity": "Dubai",
+      "departureDate": "2023-09-29",
+      "returnDate": "2023-09-29",
+      "price": "700"
+    }
+  ],
+  "cities": [
+    {
+      "value": "dhaka",
+      "label": "Dhaka, Bangladesh"
+    },
+    {
+      "value": "chittagang",
+      "label": "Chittagang, Bangladesh"
+    },
+    {
+      "value": "jebel-ali",
+      "label": "Jebel Ali, Dubai"
+    },
+    {
+      "value": "new-york",
+      "label": "New York, United State"
+    },
+    {
+      "value": "bristol",
+      "label": "Bristol, EnglandØ"
+    }
+  ],
+  "hotels": [
+    {
+      "id": 1,
+      "roomImage": "https://images.trvl-media.com/lodging/67000000/66220000/66212400/66212377/a631389f.jpg?impolicy=resizecrop&rw=455&ra=fit",
+      "name": "Hotel A",
+      "city": "New York",
+      "numberOfRooms": 2,
+      "price": 150
+    },
+    {
+      "id": 2,
+      "name": "Hotel B",
+      "roomImage": "https://images.trvl-media.com/lodging/94000000/93420000/93416200/93416180/80461ea4.jpg?impolicy=resizecrop&rw=455&ra=fit",
+      "city": "Los Angeles",
+      "numberOfRooms": 1,
+      "price": 120
+    },
+    {
+      "id": 3,
+      "roomImage": "https://images.trvl-media.com/lodging/5000000/4540000/4530200/4530110/86139940.jpg?impolicy=resizecrop&rw=455&ra=fit",
+      "name": "Hotel C",
+      "city": "Chicago",
+      "numberOfRooms": 3,
+      "price": 180
+    }
+  ]
+}

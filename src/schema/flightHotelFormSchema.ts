@@ -7,9 +7,9 @@ export const initDataFlightHotel = {
   },
   checkInDate: "",
   checkOutDate: "",
-  numberOfRooms: "",
+  numberOfRooms: "1",
   numberOfAdults: "",
-  numberOfChildren: "",
+  numberOfChildren: "0",
   city: {},
   departureCity: {},
   arrivalCity: {},
@@ -69,9 +69,5 @@ export const flighHotelFormSchema = yup.object().shape({
       ? schema.required("Departure date is required")
       : schema.optional();
   }),
-  returnDate: yup.string().when("bookingType", ([bookingType], schema) => {
-    return bookingType?.value === "flight"
-      ? schema.required("Return date is required")
-      : schema.optional();
-  }),
+  returnDate: yup.string().optional(),
 });
